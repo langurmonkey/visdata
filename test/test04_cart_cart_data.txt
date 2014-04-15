@@ -1,0 +1,4 @@
+#x y z alpha delta distance
+#pc pc km deg deg pc
+10 10 120004531 22 5 12
+0 30 233454551 153 -43 43

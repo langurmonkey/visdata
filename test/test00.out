@@ -1,0 +1,3 @@
+#x y z xdot ydot zdot alpha delta distance mualpha mudelta radialvelocity
+#pc pc pc km/s km/s km/s deg deg pc mas/a mas/a km/s
+3.94737953334 1.12462375253 10.4745365642 -1.7543909037 -0.499832778906 -4.65534958409 213.918 19.1873 11.25 -1093.0 -1999.0 -5.0

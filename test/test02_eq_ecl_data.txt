@@ -1,0 +1,6 @@
+#alpha delta distance
+#deg deg pc
+0 0 10
+180 0 10
+270 66.56 10
+90 -66.56 10
