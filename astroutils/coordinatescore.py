@@ -28,6 +28,36 @@ incl_gal_cel = math.radians(62.9)
 # Node line equatorial right ascension
 nodes_ra = math.radians(282.25)
 
+# Transformation matrices
+eq_gal = numpy.array([[-0.06451124, -0.87221785, -0.48484464, 0.],
+                        [0.48891344, -0.45117528, 0.74659528, 0.],
+                        [-0.86994364, -0.18888328, 0.45554491, 0.],
+                        [0., 0., 0., 1., ]]).T
+gal_eq = numpy.array([[-0.06451124, 0.48891344, -0.86994364, 0.],
+                         [-0.87221785, -0.45117528, -0.18888328, 0.],
+                         [-0.48484464, 0.74659528, 0.45554491, 0.],
+                         [0., 0., 0., 1.]]).T
+
+ecl_gal = numpy.array([[-0.06451124, -0.99310435, -0.09788792, 0.],
+                        [0.48891344, -0.11696667, 0.864455, 0.],
+                        [-0.86994364, 0.00790834, 0.49308773, 0.],
+                        [0., 0., 0., 1.]]).T
+
+gal_ecl = numpy.array([[-0.06451124, 0.48891344, -0.86994364, 0.],
+                        [-0.99310435, -0.11696667, 0.00790834, 0.],
+                        [-0.09788792, 0.864455, 0.49308773, 0.],
+                        [0., 0., 0., 1.]]).T
+
+eq_ecl = numpy.array([[1., 0., 0., 0.],
+                        [0., 0.91748206, 0.39777716, 0.],
+                        [0., -0.39777716, 0.91748206, 0.],
+                        [0., 0., 0., 1.]]).T
+
+ecl_eq = numpy.array([[1., 0., 0., 0.],
+                        [0., 0.91748206, -0.39777716, 0.],
+                        [0., 0.39777716, 0.91748206, 0.],
+                        [0., 0., 0., 1.]]).T
+
 
 def cartesian_to_spherical(values):
     """ Transforms cartesian coordinates into spherical coordinates.
@@ -188,9 +218,10 @@ def galactic_to_equatorial():
         l=33deg b=0deg. So we have the Euler angles alpha=-33, beta=62.9, gamma=282.25.
 
         In order to use this matrix to transform the coordinates, do:
-        > eq_vector = numpy.dot(gal_vector, galactic_to_equatorial().T)
+        > eq_vector = numpy.dot(gal_vector, galactic_to_equatorial())
     """
-    return rotation_matrix_angles(nodes_l, incl_gal_cel, nodes_ra)
+    # return rotation_matrix_angles(nodes_l, incl_gal_cel, nodes_ra)
+    return gal_eq
 
 
 def galactic_to_equatorial_v(vector):
@@ -201,7 +232,7 @@ def galactic_to_equatorial_v(vector):
         vector -- A list with the galactic cartesian coordinates [x, y, z].
     """
     vector4 = numpy.append(numpy.array(vector), numpy.array([1]))
-    return numpy.dot(vector4, galactic_to_equatorial().T)[:3].tolist()
+    return numpy.dot(vector4, galactic_to_equatorial())[:3].tolist()
 
 
 def galactic_to_equatorial_sph(vector):
@@ -222,9 +253,10 @@ def equatorial_to_galactic():
     """ Returns the transformation matrix to convert from equatorial to galactic cartesian coordinates.
 
         In order to use this matrix to transform the coordinates, do:
-        > gal_vector = numpy.dot(eq_vector, equatorial_to_galactic().T)
+        > gal_vector = numpy.dot(eq_vector, equatorial_to_galactic())
     """
-    return rotation_matrix_angles(-nodes_ra, -incl_gal_cel, -nodes_l)
+    # return rotation_matrix_angles(-nodes_ra, -incl_gal_cel, -nodes_l)
+    return eq_gal
 
 
 def equatorial_to_galactic_v(vector):
@@ -235,7 +267,7 @@ def equatorial_to_galactic_v(vector):
         vector -- A list with the equatorial cartesian coordinates [x, y, z].
     """
     vector4 = numpy.append(numpy.array(vector), numpy.array([1]))
-    return numpy.dot(vector4, equatorial_to_galactic().T)[:3].tolist()
+    return numpy.dot(vector4, equatorial_to_galactic())[:3].tolist()
 
 
 def equatorial_to_galactic_sph(vector):
@@ -261,9 +293,10 @@ def equatorial_to_ecliptic():
         ecliptic, epsilon=23.439281 deg. So we have the Euler angles alpha=0 deg, beta=epsilon deg, gamma=0 deg.
 
         In order to use this matrix to transform the coordinates, do:
-        > ecl_vector = numpy.dot(eq_vector, equatorial_to_ecliptic().T)
+        > ecl_vector = numpy.dot(eq_vector, equatorial_to_ecliptic())
     """
-    return rotation_matrix_angles(0, -obliquity, 0)
+    # return rotation_matrix_angles(0, -obliquity, 0)
+    return eq_ecl
 
 
 def equatorial_to_ecliptic_v(vector):
@@ -274,7 +307,7 @@ def equatorial_to_ecliptic_v(vector):
         vector -- A list with the equatorial cartesian coordinates [x, y, z].
     """
     vector4 = numpy.append(numpy.array(vector), numpy.array([1]))
-    return numpy.dot(vector4, equatorial_to_ecliptic().T)[:3].tolist()
+    return numpy.dot(vector4, equatorial_to_ecliptic())[:3].tolist()
 
 
 def equatorial_to_ecliptic_sph(vector):
@@ -300,9 +333,10 @@ def ecliptic_to_equatorial():
     """ Returns the transformation matrix to convert from ecliptic to equatorial coordinates
 
         In order to use this matrix to transform the coordinates, do:
-        > eq_vector = numpy.dot(ecl_vector, ecliptic_to_equatorial().T)
+        > eq_vector = numpy.dot(ecl_vector, ecliptic_to_equatorial())
     """
-    return rotation_matrix_angles(0, obliquity, 0)
+    # return rotation_matrix_angles(0, obliquity, 0)
+    return ecl_eq
 
 
 def ecliptic_to_equatorial_v(vector):
@@ -313,7 +347,7 @@ def ecliptic_to_equatorial_v(vector):
         vector -- A list with the ecliptic cartesian coordinates [x, y, z].
     """
     vector4 = numpy.append(numpy.array(vector), numpy.array([1]))
-    return numpy.dot(vector4, ecliptic_to_equatorial().T)[0:3].tolist()
+    return numpy.dot(vector4, ecliptic_to_equatorial())[0:3].tolist()
 
 
 def ecliptic_to_equatorial_sph(vector):
@@ -339,10 +373,11 @@ def ecliptic_to_galactic():
     """ Returns the transformation matrix to convert from eclpitic to galactic cartesian coordinates.
 
         In order to use this matrix to transform the coordinates, do:
-        > gal_vector = numpy.dot(ecl_vector, equatorial_to_ecliptic().T)
+        > gal_vector = numpy.dot(ecl_vector, equatorial_to_ecliptic())
     """
     # Transofrmation compositon: ECL -> GAL = ECL -> EQ + EQ -> GAL
-    return numpy.dot(equatorial_to_galactic(), ecliptic_to_equatorial())
+    # return numpy.dot(equatorial_to_galactic(), ecliptic_to_equatorial())
+    return ecl_gal
 
 
 def ecliptic_to_galactic_v(vector):
@@ -353,7 +388,7 @@ def ecliptic_to_galactic_v(vector):
         vector -- A list with the ecliptic cartesian coordinates [x, y, z].
     """
     vector4 = numpy.append(numpy.array(vector), numpy.array([1]))
-    return numpy.dot(vector4, ecliptic_to_galactic().T)[0:3].tolist()
+    return numpy.dot(vector4, ecliptic_to_galactic())[0:3].tolist()
 
 
 def ecliptic_to_galactic_sph(vector):
@@ -372,9 +407,13 @@ def ecliptic_to_galactic_sph(vector):
 
 def galactic_to_ecliptic():
     """ Returns the transformation matrix to convert from galactic to ecliptic cartesian coordinates.
+
+        In order to use this matrix to transform the coordinates, do:
+        > ecl_vector = numpy.dot(gal_vector, galactic_to_ecliptic())
     """
     # Transofrmation compositon: GAL -> ECL = GAL -> EQ + EQ -> ECL
-    return numpy.dot(equatorial_to_ecliptic(), galactic_to_equatorial())
+    # return numpy.dot(equatorial_to_ecliptic(), galactic_to_equatorial())
+    return gal_ecl
 
 
 def galactic_to_ecliptic_v(vector):
@@ -385,7 +424,7 @@ def galactic_to_ecliptic_v(vector):
         vector -- A list with the galactic cartesian coordinates [x, y, z].
     """
     vector4 = numpy.append(numpy.array(vector), numpy.array([1]))
-    return numpy.dot(vector4, galactic_to_ecliptic().T)[0:3].tolist()
+    return numpy.dot(vector4, galactic_to_ecliptic())[0:3].tolist()
 
 
 def galactic_to_ecliptic_sph(vector):
