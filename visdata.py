@@ -240,6 +240,13 @@ def run(configfile):
 
     exec_timestamp = time.strftime("%d%m%Y-%H.%M.%S")
 
+    # Create directories
+    if not os.path.exists("log"):
+        os.makedirs("log")
+    if not os.path.exists("out"):
+        os.makedirs("out")
+
+
     # Configure logger to file
     hdlr = logging.FileHandler(os.path.join(conf.get_log_path(), exec_timestamp + ".log"))
     hdlr.setLevel(logging.DEBUG)
@@ -268,6 +275,7 @@ def run(configfile):
     else:
         logger.error("Could not determine the type of data_source: %s" % data_source)
         raise Exception("Could not determine the type of data_source: %s" % data_source)
+
 
     # START CORE PROCESSING
     # Initialize output lists
