@@ -26,7 +26,7 @@ Requirements
 The visdata module uses the astroutils package, which was developed at the same time for this sole purpose.
 The astroutils package itself uses a set of third-party libraries that have proven very reliable and useful.
 
--Christoph Gohlke's transformations library. A library providing matrix transformations and quaternions handling. This is already included in the astroutils package (http://www.lfd.uci.edu/gohlke/).
+-Christoph Gohlke's transformations library. A library providing matrix transformations and quaternions handling. This is already included in the astroutils package (http://www.lfd.uci.edu/~gohlke/).
 
 -Astropy's unit conversion (http://www.astropy.org).
 
