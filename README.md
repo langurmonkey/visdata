@@ -35,7 +35,7 @@ The astroutils package itself uses a set of third-party libraries that have prov
 ## More information
 
 For further information about how to use this module or the astroutils package please refer to the
-documentation files under [/doc](/langurmonkey/visdata/tree/master/doc).
+documentation files under [/doc](/doc).
 
 ## Licensing
 
