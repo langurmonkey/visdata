@@ -1,5 +1,4 @@
-visdata
-=======
+# visdata
 
 Python module and package to fetch and process astrometric data.
 The visdata module aims to provide a flexible solution for the extraction and transformation
@@ -9,8 +8,7 @@ Even though it was initially intended for the fetching of Gaia data
 for visualisation purposes, it can be used for any other tasks.
 It includes and uses the astroutils module, which does the 'dirty' work.
 
-Introduction
-============
+## Introduction
 
 This started as a straightforward module
 which loaded some data from a database using the TAP client in GAVO's VOTable python 
@@ -20,23 +18,25 @@ in any desired units and the module would do all the conversions and transformat
 for you. In the process, the astroutils package was created. It is a collection of utilities and functions
 that do common astronomical calculations, conversions and transformations. 
 
-Requirements
-============
+## Requirements
 
 The visdata module uses the astroutils package, which was developed at the same time for this sole purpose.
 The astroutils package itself uses a set of third-party libraries that have proven very reliable and useful.
 
--Christoph Gohlke's transformations library. A library providing matrix transformations and quaternions handling. This is already included in the astroutils package (http://www.lfd.uci.edu/~gohlke/).
+-  Christoph Gohlke's transformations library. A library providing matrix transformations and quaternions handling. This is already included in the astroutils package (http://www.lfd.uci.edu/~gohlke/).
 
--Astropy's unit conversion (http://www.astropy.org).
+-  Astropy's unit conversion (http://www.astropy.org).
 
--Numpy 1.7 (http://www.numpy.org).
+-  Numpy 1.7 (http://www.numpy.org).
 
--VOTable by GAVO (http://vo.ari.uni-heidelberg.de/soft/subpkgs}{http://vo.ari.uni-heidelberg.de/soft/subpkgs).
+-  VOTable by GAVO (http://vo.ari.uni-heidelberg.de/soft/subpkgs}{http://vo.ari.uni-heidelberg.de/soft/subpkgs).
 
 
-More information
-================
+## More information
 
 For further information about how to use this module or the astroutils package please refer to the
-documentation files under /doc.
+documentation files under [/doc](/langurmonkey/visdata/tree/master/doc).
+
+## Licensing
+
+This software is distributed under the [GPLv3](https://www.gnu.org/licenses/gpl.html) license.
