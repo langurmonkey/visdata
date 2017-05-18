@@ -29,7 +29,7 @@ The astroutils package itself uses a set of third-party libraries that have prov
 
 -  Numpy 1.7 (http://www.numpy.org).
 
--  VOTable by GAVO (http://vo.ari.uni-heidelberg.de/soft/subpkgs}{http://vo.ari.uni-heidelberg.de/soft/subpkgs).
+-  VOTable by GAVO (http://vo.ari.uni-heidelberg.de/soft/subpkgs).
 
 
 ## More information
